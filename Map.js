@@ -5,9 +5,9 @@ $(function() {
 	var MapFcns = {
 		loadSiteList: function () {
 			var airportList = $('#airport-list');
-				airportList.html('');
-				airportList.append('<option value=""></option>');
-				
+			airportList.html('');
+			airportList.append('<option value=""></option>');
+			
 			sites.sort( function(a, b) {
 				return a.Code.localeCompare(b.Code);
 			});
@@ -23,14 +23,29 @@ $(function() {
 				var currAirport = _.findWhere(sites, {Code: airportCode});
 				$('#setting-code').text(currAirport.Code);
 				$('#setting-city').text(currAirport.City);
+				$('#setting-state').text(currAirport.State);
+				$('#setting-full-name').text(currAirport.FullSiteName);
+				$('#setting-lat').text(currAirport.Latitude);
+				$('#setting-long').text(currAirport.Longitude);
+				
+				var airportInformation = currAirport.City + ", " + currAirport.State;
+				
+				globalMap.setCenter({lat: currAirport.Latitude, lng: currAirport.Longitude});
 				
 				if (marker) {
 					marker.setMap(null);
 				}
+				var infoWindow = new google.maps.InfoWindow({
+					content: airportInformation
+				});
 				marker = new google.maps.Marker({
 					position: {lat: currAirport.Latitude, lng: currAirport.Longitude},
 					map: globalMap,
+					animation: google.maps.Animation.DROP,
 					title: currAirport.Code
+				});
+				marker.addListener('click', function() {
+					infoWindow.open(globalMap, marker);
 				});
 			}
 		}
