@@ -20,6 +20,8 @@ $(function() {
 			var ctl = $(this),
 			airportCode = ctl.val();
 			if(airportCode) {
+				MapFcns.clearMap();
+				
 				var currAirport = _.findWhere(sites, {Code: airportCode});
 				$('#setting-code').text(currAirport.Code);
 				$('#setting-city').text(currAirport.City);
@@ -28,15 +30,25 @@ $(function() {
 				$('#setting-lat').text(currAirport.Latitude);
 				$('#setting-long').text(currAirport.Longitude);
 				
-				var airportInformation = currAirport.City + ", " + currAirport.State;
+				var airportInformation = 
+				"<div class='window-info'>" +
+					"<center>" +
+						"<b>" + currAirport.Code + "</b> - " +
+						currAirport.City + ", " + currAirport.State +
+						"<br /><br />" +
+						currAirport.FullSiteName +
+						"<br /><br />" +
+						"<b>Lat:</b> " + currAirport.Latitude +
+						"<br />" +
+						"<b>Lng:</b> " + currAirport.Longitude +
+					"</center>" +
+				"</div>";
 				
 				globalMap.setCenter({lat: currAirport.Latitude, lng: currAirport.Longitude});
 				
-				if (marker) {
-					marker.setMap(null);
-				}
 				var infoWindow = new google.maps.InfoWindow({
-					content: airportInformation
+					content: airportInformation,
+					maxWidth: 200
 				});
 				marker = new google.maps.Marker({
 					position: {lat: currAirport.Latitude, lng: currAirport.Longitude},
@@ -47,6 +59,17 @@ $(function() {
 				marker.addListener('click', function() {
 					infoWindow.open(globalMap, marker);
 				});
+			}
+		},
+		clearMap: function() {			
+			if (marker) {
+				marker.setMap(null);
+				$('#setting-code').empty();
+				$('#setting-city').empty();
+				$('#setting-state').empty();
+				$('#setting-full-name').empty();
+				$('#setting-lat').empty();
+				$('#setting-long').empty();
 			}
 		}
 	}
@@ -63,6 +86,9 @@ $(function() {
 			toggleCtl.text('-');
 			$('#exercise-instructions').show();
 		}
+	});
+	$('#clear-map').click(function() {
+		MapFcns.clearMap();
 	});
 });
    
