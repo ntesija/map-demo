@@ -12,7 +12,8 @@ $(function() {
 				return a.Code.localeCompare(b.Code);
 			});
 			for (var i in sites) {
-				var newOption = $('<option value="' + sites[i].Code + '">' + sites[i].Code + '</option>');
+				var optionString = sites[i].Code + " - " + sites[i].City + ", " + sites[i].State;
+				var newOption = $('<option value="' + sites[i].Code + '">' + optionString + '</option>');
 				airportList.append(newOption);
 			}
 		},
@@ -23,12 +24,6 @@ $(function() {
 				MapFcns.clearMap();
 				
 				var currAirport = _.findWhere(sites, {Code: airportCode});
-				$('#setting-code').text(currAirport.Code);
-				$('#setting-city').text(currAirport.City);
-				$('#setting-state').text(currAirport.State);
-				$('#setting-full-name').text(currAirport.FullSiteName);
-				$('#setting-lat').text(currAirport.Latitude);
-				$('#setting-long').text(currAirport.Longitude);
 				
 				var airportInformation = 
 				"<div class='window-info'>" +
@@ -64,12 +59,6 @@ $(function() {
 		clearMap: function() {			
 			if (marker) {
 				marker.setMap(null);
-				$('#setting-code').empty();
-				$('#setting-city').empty();
-				$('#setting-state').empty();
-				$('#setting-full-name').empty();
-				$('#setting-lat').empty();
-				$('#setting-long').empty();
 			}
 		}
 	}
@@ -89,6 +78,7 @@ $(function() {
 	});
 	$('#clear-map').click(function() {
 		MapFcns.clearMap();
+		$('#airport-list').prop('selectedIndex', 0);
 	});
 });
    
