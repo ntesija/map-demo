@@ -1,7 +1,29 @@
+body {
+	background-color: #cacaca;
+}
+
 #airport-map{
     width: 800px;
     height: 600px;
 	margin: 0 auto;
+}
+
+#airport-list {
+	height: 40px;
+	border: 1px solid black;
+	border-radius: 3px;
+	width: 48%
+}
+
+#clear-map {
+	background-color: #99ccff;
+	height: 40px;
+	width: 48%;
+	border: 1px solid #0022ee;
+	border-radius: 3px;
+	font-size: large;
+	cursor: pointer;
+	margin-top: 10px;
 }
 
 #exercise-toggle {
@@ -15,7 +37,22 @@
     font-weight: bold;
 }
 
+.exercise-description {
+	width: 29%;
+	display: inline-block;
+}
+
+.map-container {
+	width: 70%;
+	display: inline-block;
+}
+
 .airport-controls {
-	margin: 0 auto;
-	width: 350px;
+	margin: 20px auto;
+	width: 400px;
+	text-align: center;
+}
+
+.directions {
+	width: 75%;
 }

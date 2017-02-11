@@ -10,10 +10,8 @@
         <link href="Map.css" rel="stylesheet">
     </head>
     <body>
-        <h1>LLamasoft Map Exercise
-        </h1>
-
-        <div id="exercise-description">
+        <div class="exercise-description">
+			<h1>LLamasoft Map Exercise</h1>
             <div id="instruction-toggle"><span>Instructions</span> <span id="exercise-toggle">-</span></div>
 
             <div id="exercise-instructions">
@@ -58,13 +56,17 @@
             </p>
             </div>
         </div>
-		<center><h1>Select an airport from the dropdown, click the marker on the map to learn more about the airport!</h1></center>
-		<div class="airport-controls">  
-			Airports: <select id="airport-list"></select>
-			<button id="clear-map">Clear Map</button>
+		<div class="map-container">
+			<center><h1 class="directions">Select an airport from the dropdown, then click the marker on the map to learn more about the airport!</h1></center>
+			<div class="airport-controls">  
+				<h2>Airports:</h2>
+				<div class="input-group">
+					<select id="airport-list"></select>
+					<button id="clear-map">Clear Map</button>
+				</div>
+			</div>
+			<div id="airport-map">
+			</div>
 		</div>
-		
-        <div id="airport-map">
-        </div>
     </body>
 </html>
